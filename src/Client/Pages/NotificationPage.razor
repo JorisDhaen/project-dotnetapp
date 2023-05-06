@@ -1,0 +1,108 @@
+﻿@page "/notificationPage"
+@attribute [Authorize]
+
+<div class="content">
+    <div class="top">
+        <div class="title">
+            Notificaties
+        </div>
+    </div>
+    <div class="navigatie">
+        @if (collapseNew == true)
+        {
+            <button @onclick="pressedNew" class="notiButton">Nieuw</button>
+        }
+        else
+        {
+            <button class="notiButtonActive">Nieuw</button>
+        }
+        @if (collapseHasSeen == true)
+        {
+            <button @onclick="pressedHasSeen" class="notiButton">Alle</button>
+        }
+        else
+        {
+            <button class="notiButtonActive">Alle</button>
+        }
+    </div>
+    <div class="notificationContainer">
+        @if (notifications == null)
+        {
+            <p>loading...</p>
+        }
+        else
+        {
+            @foreach (var noti in notifications)
+            {
+                @if (noti != null || noti.Order != null || noti.Message != null)
+                {
+                    @if(collapseNew == true && noti.IsSeen == 1){
+                        <div class="notificatie" @onclick="@(async () => {await EditNotification(noti);})">
+                            
+                            <a href="orders/@noti.Order.OrderId">
+                                <div class="imgDiv">
+                                    @if (noti.Message!.Equals("Uw bestelling is geleverd!"))
+                                    {
+                                        <i class="fas fa-solid fa-house"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fas fa-thin fa-circle-check"></i>
+                                    }
+                                </div>
+                                <div class="infoDiv">
+                                    <p class="bericht">Order @noti.Order.OrderId: @noti.Message.ToString()</p>
+                                    <p class="berichtInfo">@noti.NotificationDate.ToShortDateString() | @noti.NotificationDate.ToShortTimeString()</p>
+                                </div>
+                            </a>
+                            <div class="deleteButton" @onclick="@(async () => {await DeleteNotification(noti);})">
+                                x
+                            </div>
+                        </div>
+                    }
+                    //TODO fotos
+                    else if (collapseHasSeen == true && noti.IsSeen == 0){
+                        <div class="notificatie" @onclick="@(async () => {await EditNotification(noti);})">
+                            <a href="orders/@noti.Order.OrderId">
+                                <div class="imgDiv">
+                                    @if (noti.Message!.Equals("Uw bestelling is geleverd!"))
+                                    {
+                                        <i class="fas fa-solid fa-house"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fas fa-thin fa-circle-check"></i>
+                                    }
+                                </div>
+                                <div class="infoDiv">
+                                    <p class="bericht">Order @noti.Order.OrderId: @noti.Message.ToString()</p>
+                                    <p class="berichtInfo">@noti.NotificationDate.ToShortDateString() | @noti.NotificationDate.ToShortTimeString()</p>
+                                </div>
+                            </a>
+                            <div class="deleteButton" @onclick="@(async () => {await DeleteNotification(noti);})">
+                                x
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        }
+    </div>
+</div>
+
+@code{
+    private bool collapseNew = false;
+    private bool collapseHasSeen = true;
+
+    private void pressedNew()
+    {
+        collapseNew = false;
+        collapseHasSeen = true;
+    }
+
+    private void pressedHasSeen()
+    {
+        collapseHasSeen = false;
+        collapseNew = true;
+    }
+}

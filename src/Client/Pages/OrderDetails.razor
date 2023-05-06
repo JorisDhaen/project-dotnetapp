@@ -1,0 +1,125 @@
+﻿@page "/orders/{Id}"
+@using Client.Components.OrderDetails;
+@using System.Net.Mail;
+@attribute [Authorize]
+
+<PageTitle>Order Details</PageTitle>
+
+<div class="content">
+    <div class="top">
+        <div class="title">Bestel Nr. @order?.OrderId</div>
+    </div>
+    <div class="mainContent">
+        @if (order == null)
+        {
+            <p>Loading...</p>
+        }
+        else
+        {
+           <div class="status">
+            <StatusComponent OrderStatus=@order?.OrderStatus />
+            </div>
+            <div class="orderInfo">
+                <OrderInfoComponent Address="@order?.DeliveryAdress" ArrivalTime=@ArrivalTime OrderStatus=@order?.OrderStatus StatusDate=@order?.StatusDate />
+            </div>
+            <div class="navigatie">
+                @if (collapseTrackAndTrace == true)
+                {
+                    <button @onclick="pressedTrackAndTrace" class="navigatieButton">Track & Trace</button>
+                }else
+                {
+                    <button class="navigatieButtonActive">Track & Trace</button>
+                }
+                @if (collapseKaart == true)
+                {
+                    <button @onclick="pressedKaart" class="navigatieButton">Kaart</button>
+                }else
+                {
+                    <button class="navigatieButtonActive">Kaart</button>
+                }
+            </div>
+            @if (collapseTrackAndTrace == false)
+            {
+                <div class="log">
+                    <LogComponent Order="@order" Notifications="@notifications" />
+                </div>
+            }
+            @if (collapseKaart == false)
+            {
+                <div class="map">
+                    <MapsComponent Id="@Id" CalculateEstimateTime="estamateArrivalTime" />
+                </div>
+            }
+            <button class="feedbackButton" @onclick="pressedFeedback">
+                <img src="/images/feedback.svg" />
+            </button>
+            @if (collapseFeedback == true)
+            {}
+            else
+            {
+                <div class="feedback">
+                    <div class="feedbackTop">
+                        <p class="feedbackTitle">Feedback</p>
+                        <button class="closeFeedbackButton" @onclick="pressedCloseFeedback">
+                            <img src="/images/HeaderClose.png" />
+                        </button>
+                    </div>
+                    <div class="feedbackContent">
+                        <p class="feedbackNaam">Onderwerp:</p>
+                        <input class="feedbackInput" placeholder="Waarover gaat de feedback?" value="@FeedbackOnderwerp" @oninput="(EventArgs) => {SetOnderwerp(EventArgs.Value.ToString());}">
+                        <p class="feedbackNaam">Bericht:</p>
+                        <textarea class="feedbackInput feedbackInputMessage" placeholder="De feedback..." value="@FeedbackBericht" @oninput="(EventArgs) => {SetBericht(EventArgs.Value.ToString());}  "></textarea>
+                        <button class="feedbackSendButton" @onclick="SendMail">Verstuur</button>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@code {
+    private bool collapseFeedback = true;
+    public string FeedbackOnderwerp = "";
+    public string FeedbackBericht = "";
+    private bool collapseTrackAndTrace = false;
+    private bool collapseKaart = true;
+
+    private void SetOnderwerp(string Value)
+    {
+        FeedbackOnderwerp = Value;
+    }
+
+    private void SetBericht(string Value)
+    {
+        FeedbackBericht = Value;
+    }
+
+    private void pressedFeedback()
+    {
+        collapseFeedback = !collapseFeedback;
+    }
+
+    private void pressedCloseFeedback()
+    {
+        collapseFeedback = true;
+    }
+
+    private void SendMail()
+    {
+        collapseFeedback = true;
+        FeedbackOnderwerp = "";
+        FeedbackBericht = "";
+    }
+
+    private void pressedTrackAndTrace()
+    {
+        collapseTrackAndTrace = false;
+        collapseKaart = true;
+    }
+
+    private void pressedKaart()
+    {
+        collapseTrackAndTrace = true;
+        collapseKaart = false;
+    }
+}

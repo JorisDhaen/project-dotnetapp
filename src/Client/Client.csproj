@@ -1,0 +1,58 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\css\bootstrap-icons-1.10.2\**" />
+    <Content Remove="wwwroot\css\bootstrap-icons-1.10.2\**" />
+    <EmbeddedResource Remove="wwwroot\css\bootstrap-icons-1.10.2\**" />
+    <None Remove="wwwroot\css\bootstrap-icons-1.10.2\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\FakeLogin.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Pages\Index.razor.css" />
+    <None Remove="Pages\OrderDetails.razor.css" />
+	 <None Remove="Pages\TablePage.razor.css" />
+	 <None Remove="Pages\PackageShipment.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Pages\Index.razor.css" />
+    <Content Include="Pages\OrderDetails.razor.css" />
+    <Content Include="Pages\PackageShipment.razor.css" />
+    <Content Include="Pages\TablePage.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Append.Blazor.Sidepanel" Version="6.3.2" />
+    <PackageReference Include="BlazorDateRangePicker" Version="4.2.0" />
+    <PackageReference Include="Blazored.LocalStorage" Version="4.3.0" />
+    <PackageReference Include="BlazorGoogleMaps" Version="2.4.3" />
+    <PackageReference Include="Font.Awesome" Version="5.15.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.10" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Service\Services.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Shared\Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Components\Login\FakeLogin.razor" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,41 @@
+﻿@using System.Security.Claims;
+@inject FakeAuthenticationProvider FakeAuthenticationProvider
+
+<div style="display : flex">
+    <div>
+        <p>Login as:</p>
+    </div>
+    <div>
+        <select name="loginAsSelect" id="loginAsSelect" onchange="@((ChangeEventArgs __e) => LoginAsSelectHandler(__e))">
+            <option value="LoginAsCustomer">@FakeAuthenticationProvider.Customer.FindFirst(ClaimTypes.Name)?.Value</option>
+            <option value="Anonymous">Anonymous</option>
+            <option value="LoginAsCustomer2">@FakeAuthenticationProvider.Customer2.FindFirst(ClaimTypes.Name)?.Value</option>
+        </select>
+    </div>
+</div>
+
+@code {
+    void LoginAsSelectHandler(ChangeEventArgs e)
+    {
+        switch (e.Value)
+        {
+            case "Anonymous":
+               
+                FakeAuthenticationProvider.ChangeAuthenticationState(FakeAuthenticationProvider.Anonymous);
+                break;
+            case "LoginAsCustomer":
+                
+                FakeAuthenticationProvider.ChangeAuthenticationState(FakeAuthenticationProvider.Customer);
+                break;
+            case "LoginAsCustomer2":
+                FakeAuthenticationProvider.ChangeAuthenticationState(FakeAuthenticationProvider.Customer2);
+                break;
+        }
+    }
+  
+}
+
+
+
+
+

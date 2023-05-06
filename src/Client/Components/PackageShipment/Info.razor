@@ -1,0 +1,15 @@
+﻿@using Client.Components.Products
+<div class="contentInfoSend">
+    <div>
+        Verzender: Bol.com
+    </div>
+    <div>
+        Beschrijving: Kleren
+    </div>
+    <div>
+        Afleveradres: Sluisweg 1, 9000 Gent
+    </div>
+</div>
+@code {
+    [Inject] public ShoppingCartState shoppingCart { get; set; } = default!;
+}

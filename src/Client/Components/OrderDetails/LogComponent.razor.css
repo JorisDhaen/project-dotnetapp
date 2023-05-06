@@ -1,0 +1,66 @@
+﻿.infoPackageAndTracking{
+    display: flex;
+    flex-direction: column;
+    width: 96%
+}
+
+.infoPackage, .infoTracking {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.infoPackage {
+    justify-content: space-between;
+    background-color: #ECECEC;
+}
+
+.infoPackageTop {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0.5rem;
+}
+
+.infoPackageTekst{
+    margin: 0;
+    width: 100%;
+}
+
+.first > .infoPackageTekst{
+    width: 50%;
+}
+
+.infoTracking {
+    background-color: #E4E4E4;
+}
+
+.infoTracking p {
+    margin-bottom: 0.5rem;
+}
+
+.infoTracking ul {
+    padding-left: 1rem;
+}
+
+.liImage{
+    list-style-type: none;
+}
+
+.liImage > li > i{
+    color: forestgreen;
+}
+
+@media (max-width: 550px){
+    .infoPackageTop {
+        flex-direction: column;
+        margin-bottom: 0rem;
+    }
+
+    .infoPackageTop:first-of-type p{
+        margin-bottom: 0.5rem;
+    }
+
+    .item {
+        margin-bottom: 0.5rem;
+    }
+}

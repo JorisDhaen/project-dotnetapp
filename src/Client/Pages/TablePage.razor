@@ -1,0 +1,49 @@
+﻿@page "/orders"
+@using BlazorDateRangePicker
+@inject FakeAuthenticationProvider FakeAuthenticationProvider
+@attribute [Authorize]
+
+<PageTitle>Orders</PageTitle>
+
+
+<div class="content">
+    <div class="top">
+        <div class="title">Mijn Bestellingen</div>
+        <div class="searchComp">
+            <DateRangePicker class="form-control" placeholder="Filter datum..." OnRangeSelect="OnRangeSelect" ApplyLabel="Zoek" CancelLabel="Annuleer" OnReset="OnResetRange" />
+            <div class="searchfield">
+                <input type="text" value="@OrderNr" placeholder="Zoek bestelling..." @onchange="SearchTermChanged"/>
+            </div>
+        </div>
+    </div>
+    <div class="orderTable">
+        <div class="head">
+            <p class="datumTitel"><button @onclick="SortDate" class="sortButton">Datum <img class="sortImage" src="/images/sortArrow.png" /></button></p>
+            <p class="adresTitel">Leveradres</p>
+            <p class="orderIdTitel">Bestel Nr</p>
+            <p class="statusTitel"><button @onclick="SortStatus" class="sortButton">Status <img class="sortImage" src="/images/sortArrow.png" /></button></p>
+        </div>
+        <div class="body">
+            @if (ordersFiltered == null)
+            {
+                <p>Loading.... </p>
+            }
+            else
+            {
+                @foreach (var o in ordersFiltered)
+                {
+                    <a href="orders/@o.OrderId" class="order">
+                        <div class="orderFirst">
+                            <p class="datum"cl>@o.OrderDate.ToShortDateString()</p>
+                            <p class="adres">@o.DeliveryAdress</p>
+                        </div>
+                        <div class="orderSecond">
+                            <p class="orderId">@o.OrderId</p>
+                            <p class="status">@Enum.GetName(typeof(OrderStatus), o.OrderStatus)</p>
+                        </div>
+                    </a>
+                }
+            }
+        </div>
+    </div>
+</div>

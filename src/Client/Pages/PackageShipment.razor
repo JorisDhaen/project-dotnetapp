@@ -1,0 +1,23 @@
+﻿@page "/packageShipment"
+@using Client.Components.PackageShipment
+@attribute [Authorize]
+
+
+<div class="content">
+    <div class="top">
+        <div class="title">
+            Verzenden
+        </div>
+    </div>
+
+    <div class="mainContent">
+        <!--<div class="info"> <Info /></div>-->
+        <button @onclick="ContinueShopping" class="continueShopping">Verder Winkelen</button>
+
+        <div class="boxOrder">
+           <BoxOrder />
+        </div>
+   
+    </div>
+</div>
+

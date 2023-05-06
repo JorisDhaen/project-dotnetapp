@@ -1,0 +1,39 @@
+﻿.top {
+    background-color: white;
+    display: flex;
+    border-bottom: 0.1rem solid gray;
+    padding: 1rem;
+    padding-bottom: 0;
+    margin-bottom: 1rem;
+}
+
+    .top > .title {
+        font-weight: lighter;
+        color: grey;
+        align-self: flex-end;
+        font-size: xx-large;
+    }
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    width: 150px;
+    text-align: left;
+}
+
+.products-table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.voegToe{
+    width: 50px;
+}
+
+@media (max-width: 900px) {
+    .teKleinScherm {
+        display: none;
+    }
+}

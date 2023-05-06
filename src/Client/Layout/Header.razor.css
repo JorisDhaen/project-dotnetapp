@@ -1,0 +1,340 @@
+﻿.header {
+    height: 80px;
+    background-color: #ec4842;
+    padding: 0px 70px 0px 70px;
+}
+
+.header, .left, .right, .leftButton, .search, .phoneSearch {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    /*---- LEFT START ----*/
+
+    .left a {
+        margin-right: 3rem;
+    }
+
+.leftLogo img {
+    height: 36px;
+}
+
+.leftButton {
+    padding: 0px 7px 2px 7px;
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 2px;
+    border-bottom: 1px solid #ec4842;
+    color: white;
+    transition-duration: 500ms;
+}
+
+    .leftButton:hover {
+        padding: 0px 7px 2px 7px;
+        text-decoration: none;
+        font-weight: 500;
+        letter-spacing: 2px;
+        border-bottom: 1px solid white;
+        color: white;
+        text-shadow: 0 0 1px white;
+        transition-duration: 500ms;
+    }
+
+/*---- LEFT END ----*/
+
+/*---- RIGHT START ----*/
+
+.rightButton {
+    height: 40px;
+    border-radius: 20px;
+    margin-left: 2rem;
+    border: none;
+    background-color: #ec4842;
+}
+
+    .rightButton img {
+        height: 30px;
+        width: 30px;
+        transition-duration: 300ms;
+    }
+
+        .rightButton img:hover {
+            padding: 2px;
+            transition-duration: 300ms;
+        }
+
+.NotificationsMenu, .ShoppingCart {
+    position: absolute;
+    height: fit-content;
+    max-height: 50vh;
+    width: 400px;
+    background-color: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.NotificationsMenu {
+    right: 140px;
+    top: 80px;
+}
+
+.ShoppingCart {
+    right: 70px;
+    top: 80px;
+}
+
+.NotificationsMenuTitle, .ShoppingCartTitle {
+    padding: 5px 0px 5px 10px;
+    border-bottom: 1px solid #ec4842;
+    color: black;
+}
+
+.closePhoneNotifications, .closePhoneShoppingcart {
+    display: none;
+}
+
+.notificationContainer {
+    max-height: 350px;
+    overflow-y: scroll;
+    margin: 5px;
+    margin-top: 0;
+}
+
+.shopItemsContainer > ul {
+    max-height: 300px;
+    overflow-y: scroll;
+    margin: 5px;
+}
+
+.geenItems {
+    color: black;
+}
+
+.shoppingcartButtonContainer {
+    height: max-content;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    margin: 20px 20px 15px 20px;
+}
+
+.shoppingcartButton {
+    height: 40px;
+    width: 150px;
+    background-color: #ec4842;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    transition-duration: 500ms;
+}
+
+    .shoppingcartButton:hover {
+        background-color: #d11b15;
+        transition-duration: 500ms;
+    }
+
+.notificatie {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid #ec4842;
+    transition-duration: 500ms;
+}
+
+    .notificatie:hover {
+        background-color: lightgray;
+        transition-duration: 500ms;
+    }
+
+.notificationContainer > div > a {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    color: black;
+    text-decoration: none;
+}
+
+.notificationContainer > div {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.1rem solid #ec4842;
+}
+
+.imgDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90px;
+    width: 12%;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+i {
+    color: forestgreen;
+    font-size: xx-large;
+}
+
+.infoDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-overflow: clip;
+    margin-left: 5px;
+    height: 80px;
+    width: 70%;
+}
+
+.bericht {
+    font-size: large;
+    margin: 0;
+}
+
+.berichtInfo {
+    color: gray;
+    font-size: medium;
+    margin: 0;
+}
+
+/*---- RIGHT END ----*/
+/*---- PHONE START ----*/
+.dropDown, .navmenuToggler {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .headerPhone {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .rightButton, .leftButton {
+        display: none;
+    }
+
+    .navmenuToggler {
+        display: block;
+        border: none;
+        background-color: inherit;
+    }
+
+        .navmenuToggler img {
+            height: 40px;
+            width: 40px;
+        }
+
+    .dropDown {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: start;
+        position: absolute;
+        top: 80px;
+        left: 0px;
+        width: 100vw;
+        height: 160px;
+        background-color: #ec4842;
+        padding: 1rem 2rem 1rem 2rem;
+        border-top: 1px solid white;
+    }
+
+    .NotificationsMenu, .ShoppingCart {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        height: 100vh;
+        max-height: 100vh;
+        width: 100vw;
+        background-color: white;
+        border-radius: 0;
+        box-shadow: 0;
+    }
+
+    .phoneNotificationsMenuTop, .phoneShoppingcartMenuTop {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        margin: 1rem;
+    }
+
+    .NotificationsMenuTitle, .ShoppingCartTitle {
+        width: 100%;
+        height: 40px;
+        border-bottom: 1px solid #ec4842;
+        padding-left: 0.5rem;
+        font-size: large;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
+
+    .closePhoneNotifications, .closePhoneShoppingcart {
+        display: block;
+        height: 40px;
+        width: 40px;
+        border: none;
+        border-radius: 5px;
+        background-color: #ec4842;
+        padding: 2px;
+    }
+
+        .closePhoneNotifications img, .closePhoneShoppingcart img {
+            height: 30px;
+        }
+
+    .notificationContainer, .shopItemsContainer {
+        overflow-y: scroll;
+        margin: 5px;
+    }
+}
+
+.phoneButton {
+    width: 100%;
+    padding: 0px 7px 2px 7px;
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 2px;
+    border-bottom: 1px solid #ec4842;
+    color: white;
+    transition-duration: 500ms;
+}
+
+    .phoneButton:hover {
+        padding: 0px 7px 2px 7px;
+        text-decoration: none;
+        font-weight: 500;
+        letter-spacing: 2px;
+        border-bottom: 1px solid white;
+        color: white;
+        text-shadow: 0 0 1px white;
+        transition-duration: 500ms;
+    }
+
+.phoneButtonIconsDiv {
+    width: 100%;
+    padding: 0px 7px 2px 7px;
+    border-bottom: 1px solid #ec4842;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.phoneButtonIcon {
+    background-color: #ec4842;
+    border: none;
+    margin-right: 2rem;
+}
+
+    .phoneButtonIcon img {
+        height: 30px;
+        width: 30px;
+        transition-duration: 300ms;
+    }
+
+        .phoneButtonIcon img:hover {
+            padding: 2px;
+            transition-duration: 300ms;
+        }

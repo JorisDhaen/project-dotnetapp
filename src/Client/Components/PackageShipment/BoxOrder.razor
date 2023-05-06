@@ -1,0 +1,118 @@
+﻿@using Client.Components.Products
+@inject FakeAuthenticationProvider FakeAuthenticationProvider
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th scope="col">Aantal</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Prijs(€)</th>
+                        <th scope="col">Volume(m³)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Cart.Items)
+                    {
+                        <tr>
+                            <th scope="row">@item.Quantity</th>
+                            <td>@item.Product.ProductName</td>
+                            <td>@item.TotalPrice</td>
+                            <td>
+                                @String.Format("{0:0.####}", item.Product.Width*item.Product.Height*item.Product.Depth) * @item.Quantity = @String.Format("{0:0.####}", item.Product.Width*item.Product.Height*item.Product.Depth * @item.Quantity)
+                            </td>
+                        </tr>
+                    }
+                    <tr>
+                        <th scope="row" colspan="3"><p><b>Totaal: € </b>@Cart.Items.Select(i => i.TotalPrice *i.Quantity).Sum().ToString()</p></th>
+                        <td><b>@String.Format("{0:0.####}", Cart.Items.Select(i => i.Product.Width * i.Product.Height * i.Product.Depth * i.Quantity).Sum())</b></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <button @onclick="ShowAddressForm">Adres toevoegen</button>
+    @if(!adresIngevuld){
+        <p class="adres" style="color: red">
+            Adres moet ingevuld zijn
+        </p>
+    }
+    <div class="row totalen">
+        <div class="col-6">
+            <div style="display: @(Error ? "block" : "none"); color: red">
+                @ErrorMsg
+            </div>
+            <div class="choiceOfBox">
+                <label for="boxType">Type doos: </label>
+                <select name="boxType" id="boxType" value=@BoxType
+                 @onchange="@((ChangeEventArgs __e) => typeChange(__e))" >    
+                    <option value=""disabled selected>-- Maak een keuze --</option>
+                    <option value="standardBox">Standaard dozen</option>
+                    <option value="tailerMadeBox">Aangepaste dozen</option>
+                </select>
+                <div class="format">
+                    <div style="display: @(BoxType == "standardBox"  ? "block" : "none");">
+                        Formaat:<br />
+                        <p>Breedte = 30 cm<br /></p>
+                        <p>Hoogte = 50 cm<br /></p>
+                        <p>Diepte = 50 cm<br /></p>
+                    </div>
+                    <div style="display: @(BoxType == "tailerMadeBox"  ? "block" : "none");">
+                        <label for="boxFormat">Voorgestelde formaten: </label>
+                        <select name="boxFormat" id="boxFormat" value=@BoxFormat
+                                @onchange="@((ChangeEventArgs __e) => formatChange(__e))" >
+                            <option value="" disabled selected>-- Maak een keuze --</option>
+                            <option value="eigen">Eigen keuze  €€</option>
+                            <option value="klein">Klein €</option>
+                            <option value="groot">Groot €</option>
+                        </select>
+                        <br />
+                        @if (BoxFormat == "klein")
+                        {
+                            <p>€@fee per doos</p>
+                            <p>20cm x 20 cm x 20 cm</p>
+                        }
+                        @if (BoxFormat == "groot")
+                        {
+                            <p>€@fee per doos</p>
+                            <p>80cm x 80 cm x 80 cm</p>
+                        }
+                        @if (BoxFormat == "eigen")
+                        {
+                            <p>€@fee per doos</p>
+                            <p>Breedte = <input class="inputNumber" type="number" @bind="@Breedte" placeholder="50" min="@productAfmetingen.Width" max="@pallet.Width" /> cm<br /></p>
+                            <p>Hoogte = <input class="inputNumber" type="number" @bind="@Hoogte" placeholder="30" min="@productAfmetingen.Height" max="@pallet.Height" /> cm<br /></p>
+                            <p>Diepte = <input class="inputNumber" type="number" @bind="@Diepte" placeholder="50" min="@productAfmetingen.Depth" max="@pallet.Depth" /> cm<br /></p>
+                        }
+                        <button @onclick="BerekenPrijs">Bereken prijs</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (@PrijsTotaal > 0)
+        {
+            <div class="col-6">
+                <div class="boxOrderGrid">
+                    <p><b>Subtotaal:</b></p>
+                    <p><b>€@PrijsSubTotaal</b></p>
+                    <p class="subTask">+ @AantalPaletten paletten</p>
+                    <p class="subTaskPrice">€@PrijsPaletten</p>
+                    <p class="subTask">+ @AantalDozen dozen</p>
+                    <p class="subTaskPrice">€@PrijsDozen</p>
+                    @if (fee != 0)
+                    {
+                         <p class="subTask">+ extra tarief</p>
+                        <p class="subTaskPrice">€@totalFee</p>
+                    }
+                    <p class="subTask">+ verzending</p>
+                    <p class="subTaskPrice">€@PrijsVerzending</p>
+                    <p><b>Totaal:</b></p>
+                    <p><b>€@PrijsTotaal</b></p>
+                    <button @onclick=@CreateOrderAsync>Plaats een bestelling</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

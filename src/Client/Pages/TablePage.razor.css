@@ -1,0 +1,235 @@
+﻿/*---- TOP START ----*/
+.top {
+    background-color: white;
+    display: flex;
+    border-bottom: 0.1rem solid gray;
+    padding: 1rem;
+    padding-bottom: 0;
+    margin-bottom: 1rem;
+}
+
+    .top > .title {
+        font-weight: lighter;
+        color: grey;
+        font-size: xx-large;
+    }
+
+    .top > .searchComp {
+        margin-left: auto;
+        display: flex;
+        justify-content: end;
+        height: fit-content;
+        padding-bottom: 0.5rem;
+    }
+
+        .top > .searchComp > .searchfield > input[type="text"] {
+            background-color: #e8e6e6;
+            transition-duration: 500ms;
+            margin-left: 1.5rem;
+            padding-bottom: 0.3rem;
+            padding-top: 0.3rem;
+            padding-left: 1rem;
+            padding-right: 3rem;
+            border: 0.1rem solid transparent;
+            border-radius: 10px;
+        }
+
+        .top > .searchComp > .searchfield > input[type="text"]:hover {
+            background-color: #cecaca;
+        }
+
+.arrow {
+    border: none;
+    background-color: transparent;
+}
+
+.sortButton {
+    display:flex;
+    border:none;
+    font-weight:bold;
+    background-color: transparent;
+    margin:auto;
+    padding-left:1rem;
+}
+
+.sortButton > img {
+    width: 18%;
+    margin: auto;
+    margin-left: -0.1rem;
+}
+/*---- TOP END ----*/
+/*---- ORDERTABLE START ----*/
+
+
+.head {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 0.1rem solid black;
+    text-align: center;
+    padding: 0 2rem 0 5rem;
+}
+
+    .head > p {
+        font-weight: 600;
+        text-align: start;
+    }
+
+        .head > p > button {
+            margin: 0;
+        }
+
+.datumTitel {
+    width: 24%;
+}
+
+.adresTitel {
+    width: 40%;
+}
+
+.orderIdTitel {
+    width: 22%;
+}
+
+.statusTitel {
+    width: 22%;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.order, .orderFirst, .orderSecond {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+.order {
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 0 3rem 0 5rem;
+    height: 4rem;
+}
+
+.orderFirst > p, .orderSecond > p {
+    margin: 0;
+}
+
+.orderFirst {
+    width: 60%;
+}
+
+.orderSecond {
+    width: 40%;
+}
+
+.datum {
+    width: 35%;
+}
+
+.adres {
+    width: 65%;
+}
+
+.orderId, .status {
+    width: 50%;
+}
+
+.order:nth-of-type(even) {
+    background-color: white;
+    transition-duration: 500ms;
+}
+
+    .order:nth-of-type(even):hover {
+        background-color: #d9d9d9;
+        transition-duration: 500ms;
+    }
+
+.order:nth-of-type(odd) {
+    background-color: #eff7ff;
+    transition-duration: 500ms;
+}
+
+    .order:nth-of-type(odd):hover {
+        background-color: #cce6ff;
+        transition-duration: 500ms;
+    }
+
+/*---- ORDERTABLE END ----*/
+
+@media(max-width: 900px) {
+    .top {
+        flex-direction: column;
+    }
+
+        .top > .searchComp {
+            width: 100%;
+            justify-content: space-between;
+        }
+
+    .adresTitel, .orderIdTitel{
+        display: none;
+    }
+
+    .datumTitel {
+        width: 65%;
+    }
+
+    .statusTitel {
+        width: 35%;
+    }
+
+    .head {
+        padding: 0 2rem 0 3rem;
+    }
+
+    .order {
+        justify-content: start;
+        height: 6rem;
+        padding: 0 2rem 0 3rem;
+    }
+
+    .orderFirst, .orderSecond {
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+    }
+
+    .orderFirst {
+        width: 65%;
+    }
+
+    .orderSecond {
+        width: 35%;
+    }
+
+    .orderId, .status, .datum, .adres {
+        width: 100%;
+    }
+}
+
+@media(max-width: 500px) {
+    .top > .searchComp {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+        .top > .searchComp > .searchfield, .top > .searchComp > .searchfield > input[type="text"] {
+            width: 100%;
+            margin-left: 0px;
+            margin-top: 5px;
+        }
+
+    .order {
+        padding: 0 0.5rem 0 1.5rem;
+    }
+}

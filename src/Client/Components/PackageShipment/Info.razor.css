@@ -1,0 +1,13 @@
+﻿.contentInfoSend {
+    margin: 2rem;
+    background-color: #FFC7C7;
+    border-radius: 1rem;
+    display: flex;
+    width: max-content;
+    padding: 26px;
+}
+
+.contentInfoSend > div{
+    margin-right: 5rem;
+    font-size: 25px;
+}

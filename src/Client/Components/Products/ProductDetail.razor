@@ -1,0 +1,23 @@
+﻿@inject Blazored.LocalStorage.ILocalStorageService localStore
+<tr>
+    <td><button @onclick="ShowDetails" class="btn btn-outline-danger">@Product.Name</button></td>
+    <td class="teKleinScherm">@Product.Description</td>
+    <td>€ @Product.UnitPrice</td>
+    <td>
+        <AuthorizeView Roles="Customer">
+        <button class="btn btn-dark" @onclick="AddProduct">+</button>
+        </AuthorizeView>
+    </td>
+</tr>
+@if (DetailsShown)
+{
+    <tr>
+        <td colspan="4">
+           <p><b>Afmetingen:</b></p>
+           <small>
+                @String.Format("Breedte: {0} cm\t Hoogte: {1} cm\t Diepte: {2} cm", Product.Width, Product.Height, Product.Depth)
+           </small>
+           <p><b>Aantal beschikbaar:</b> @Product.LeftInStock</p>
+        </td>
+    </tr>
+}

@@ -1,0 +1,33 @@
+﻿
+/*---- MAIN START ----*/
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.item {
+    margin: 3rem;
+}
+
+.itemIcon {
+
+}
+
+    .itemIcon img {
+        height: 200px;
+        width: 200px;
+    }
+
+@media (max-width: 900px){
+    .container {
+        flex-direction: column;
+    }
+    .item {
+        margin: 1rem;
+    }
+}
+
+/*---- MAIN END ----*/

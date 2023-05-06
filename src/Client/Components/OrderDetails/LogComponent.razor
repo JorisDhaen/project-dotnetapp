@@ -1,0 +1,39 @@
+﻿<div class="infoPackageAndTracking">
+    <div class="infoPackage">
+        <div class="infoPackageTop">
+            <p class="infoPackageTekst">Besteld op: <b>@Order?.OrderDate.ToShortDateString()</b></p>
+            <p class="infoPackageTekst">Totale prijs: <b>€@Order?.NetPrice.ToString()</b></p>
+        </div>
+        @*<p class="infoPackageTekst">Inhoud: 
+             @foreach (var product in producten)
+             {
+                <b>@product.Name, </b>   
+             }
+        </p>*@
+    </div>
+    <div class="infoTracking">
+        <p>Track & Trace:</p>
+        <ul class="liImage">
+            @if(Notifications == null)
+            {
+                <li>Loading...</li>
+            }
+            else
+            {
+                @foreach (var n in Notifications)
+                {
+                    @if (n.Message!.Equals("Uw bestelling is geleverd!"))
+                    {
+                        <li class="item"><i class="fas fa-solid fa-house"></i> @setLogMessage(n)</li>
+                    }
+                    else
+                    {
+                        <li class="item"><i class="fas fa-thin fa-circle-check"></i> @setLogMessage(n)</li>
+                    }
+                }
+            }
+        </ul>
+    </div>
+</div>
+
+

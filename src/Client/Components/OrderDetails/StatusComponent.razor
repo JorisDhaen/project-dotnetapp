@@ -1,0 +1,75 @@
+﻿<div class="statusMain">
+
+    <div class="componentTracking">
+        @if (OrderStatus >= 1)
+        {
+                <figure class="productBesteld">
+                    <img src="/images/trackingSymbolGreen.svg" />
+                    <figcaption>Product besteld</figcaption>
+                </figure>
+                <img class="line" src="/images/lineGreen.svg" />
+        } else {
+                <figure class="productBesteld">
+                    <img src="/images/trackingSymbol.svg" />
+                    <figcaption>Product besteld</figcaption>
+                </figure>
+                <img class="line" src="/images/lineBlack.svg" />
+        }
+    </div>
+
+    <div class="componentTracking">
+        @if (OrderStatus >= 2)
+        {
+            <figure class="productBesteld">
+                <img src="/images/trackingSymbolGreen.svg" />
+                <figcaption>Bestelling verwerkt</figcaption>
+            </figure>
+            <img class="line" src="/images/lineGreen.svg" />
+        }
+        else
+        {
+            <figure class="productBesteld">
+                <img src="/images/trackingSymbol.svg" />
+                <figcaption>Bestelling verwerkt</figcaption>
+            </figure>
+            <img class="line" src="/images/lineBlack.svg" />
+        }
+    </div>
+
+    <div class="componentTracking">
+        @if (OrderStatus >= 3)
+        {
+            <figure class="productBesteld">
+                <img src="/images/trackingSymbolGreen.svg" />
+                <figcaption>Product verzonden</figcaption>
+            </figure>
+            <img class="line" src="/images/lineGreen.svg" />
+        }
+        else
+        {
+            <figure class="productBesteld">
+                <img src="/images/trackingSymbol.svg" />
+                <figcaption>Product verzonden</figcaption>
+            </figure>
+            <img class="line" src="/images/lineBlack.svg" />
+        }
+    </div>
+
+    <div class="componentTracking">
+        @if (OrderStatus >= 4)
+        {
+            <figure class="productBesteld">
+                <img src="/images/trackingSymbolGreen.svg" />
+                <figcaption>Product geleverd</figcaption>
+            </figure>
+        }
+        else
+        {
+            <figure class="productBesteld">
+                <img src="/images/trackingSymbol.svg" />
+                <figcaption>Product geleverd</figcaption>
+            </figure>
+        }
+    </div>
+</div>
+

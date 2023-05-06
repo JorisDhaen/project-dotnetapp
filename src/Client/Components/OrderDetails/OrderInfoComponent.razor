@@ -1,0 +1,12 @@
+﻿@if (OrderStatus >= 4)
+{
+    <p class="eta">Bestelling geleverd op: <b> @StatusDate?.ToShortDateString() @StatusDate?.ToShortTimeString()</b>, aan: <b>@Address</b></p>
+}
+else if (OrderStatus == 3)
+{
+    <p class="eta">Bestelling verwacht op: <b> @ArrivalTime?.ToShortDateString() @ArrivalTime?.ToShortTimeString()</b>, aan: <b>@Address</b></p>
+}
+else
+{
+    <p class="eta">Bestelling verwacht op: <b> @ArrivalTime?.ToShortDateString()</b>, aan: <b>@Address</b></p>
+}

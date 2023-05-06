@@ -1,0 +1,40 @@
+﻿@page "/products"
+@using Domain
+@using System.Net.Http
+@using System.Net.Http.Json
+@using System.Threading.Tasks
+@using Client.Components.Products
+@inject HttpClient Http
+
+<div class="content">
+    <div class="top">
+        <div class="title">
+            Producten
+        </div>
+    </div>
+    @if (_products == null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-responsive p-4 products-table">
+                <thead>
+                    <tr>
+                        <th class="voegToe" scope="col">Naam</th>
+                        <th class="teKleinScherm" scope="col">Beschrijving</th>
+                        <th class="voegToe" scope="col">Prijs</th>
+                        <th class="voegToe"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in _products)
+                    {
+                        <ProductDetail Product="product"></ProductDetail>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

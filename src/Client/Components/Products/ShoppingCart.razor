@@ -1,0 +1,25 @@
+﻿@using Client.Components.Products
+<div class="ShoppingCart">
+    <h3 class="ShoppingCartTitle">Winkelwagen</h3>
+    <ul class="list-group p-1">
+
+        @foreach (var orderItem in Cart.Items)
+        {
+            <li class="list-group-item">
+                <small>@((orderItem.Product.UnitPrice * orderItem.Quantity).ToString("C"))</small> 
+                @orderItem.Product.ProductName
+                <div style="float:right">
+                    <button @onclick="() => MinusOne(orderItem)" type="button" class="btn btn-light">-</button>
+                    @orderItem.Quantity
+                    <button @onclick="() => PlusOne(orderItem)" type="button" class="btn btn-light">+</button>
+                    <button @onclick="() => RemoveItem(orderItem)" type="button" class="btn btn-danger" style="float:right">x</button>
+                </div>
+            </li>
+        }
+    </ul>  
+    <br />
+    @if(Cart.Items.Count > 0) {
+        <button @onclick="() => OrderItems()"type="button" class="align-self-end btn btn-dark">Bestel</button>
+        <button @onclick="() => ClearItems()" type="button" class="align-self-end btn btn-danger">Verwijder</button>
+    }
+</div>

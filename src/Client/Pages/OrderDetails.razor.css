@@ -1,0 +1,220 @@
+﻿.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    height: 85vh;
+}
+
+/*---- TOP START ----*/
+.top {
+    background-color: white;
+    display: flex;
+    border-bottom: 0.1rem solid gray;
+    padding: 1rem;
+    padding-bottom: 0;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+    .top > .title {
+        font-weight: lighter;
+        color: grey;
+        align-self: flex-end;
+        font-size: xx-large;
+    }
+
+/*---- TOP END ----*/
+
+/*---- MIDDLE CONTENT START ----*/
+.address,
+.map,
+.orderInfo,
+.log,
+.status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainContent{
+    max-width: 100%;
+}
+
+.navigatie{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 1rem;
+}
+.navigatieButton {
+    color: #ec4842;
+    background-color: white;
+    border-radius: 0.4rem;
+    border: 1px solid #ec4842;
+    justify-self: center;
+    padding: 0.5rem;
+    width: 47%;
+    transition-duration: 500ms;
+    box-shadow: 0px 0px 2px 1px rgba(176,175,175,0.75);
+}
+
+    .navigatieButton:hover {
+        color: white;
+        background-color: #ec4842;
+        transition-duration: 500ms;
+    }
+
+.navigatieButtonActive {
+    color: white;
+    background-color: #ec4842;
+    border-radius: 0.4rem;
+    border: 1px solid #ec4842;
+    justify-self: center;
+    padding: 0.5rem;
+    width: 47%;
+    transition-duration: 500ms;
+    box-shadow: 0px 0px 2px 1px rgba(176,175,175,0.75);
+}
+
+.log, .map{
+    width: 100%;
+}
+
+.map{
+    height: 400px;
+}
+
+/*---- MIDDLE CONTENT END ----*/
+
+.feedbackButtonSimpleFix {
+    position: absolute;
+    border: 0;
+    background-color: inherit;
+}
+
+.feedbackButton {
+    position: absolute;
+    right: 10px;
+    bottom: 0px;
+    border: 0;
+    background-color: inherit;
+}
+
+.feedback {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    right: 10px;
+    bottom: 0px;
+    height: 493px;
+    width: 400px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.feedbackTop {
+    color: #ec4842;
+    width: 100%;
+    height: fit-content;
+    padding: 4px 10px 4px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ec4842;
+}
+
+.feedbackTitle {
+    margin: 0;
+    color: black;
+}
+
+.closeFeedbackButton {
+    display: block;
+    height: 40px;
+    width: 40px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ec4842;
+    padding: 2px;
+}
+
+    .closeFeedbackButton img {
+        height: 30px;
+    }
+
+.feedbackContent {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.feedbackNaam {
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.feedbackInput {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.feedbackInputMessage {
+    height: 250px;
+}
+
+.feedbackBottom {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.feedbackSendButton {
+    height: 45px;
+    width: 100%;
+    background-color: #ec4842;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    transition-duration: 500ms;
+}
+
+    .feedbackSendButton:hover {
+        background-color: #d11b15;
+        transition-duration: 500ms;
+    }
+
+@media only screen and (max-width: 1200px) {
+    .top {
+        background-color: white;
+        display: flex;
+        border-bottom: 0.1rem solid gray;
+        padding: 1rem;
+        padding-bottom: 0;
+        margin-bottom: 1rem;
+    }
+
+        .top > .title {
+            font-weight: lighter;
+            color: grey;
+            align-self: flex-end;
+            font-size: xx-large;
+        }
+
+    .mainContent {
+        flex-direction: column;
+    }
+
+    .feedbackButton {
+        bottom: 10px;
+    }
+
+    .feedback {
+        right: 5%;
+        bottom: 75px;
+        width: 90%;
+        margin: 0;
+    }
+}

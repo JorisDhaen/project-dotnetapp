@@ -1,0 +1,189 @@
+﻿@using Client.Components.Products;
+@using Client.Components.Login;
+@inject FakeAuthenticationProvider FakeAuthenticationProvider
+@inject Blazored.LocalStorage.ILocalStorageService localStore
+
+
+<div class="header">
+    <div class="left">
+        <a href="/" class="leftLogo">
+            <img src="/images/HeaderDelawareLogo.png" />
+        </a>
+        
+        <a href="products" class="leftButton" @onclick="pressedCloseDropdown">
+            Producten
+        </a>
+        <AuthorizeView Roles="Customer">
+        <a href="orders" class="leftButton" @onclick="pressedCloseDropdown">
+            Bestellingen
+        </a>
+        </AuthorizeView>
+        <FakeLogin />
+    </div>
+    <div class="right">
+        <button class="rightButton rightButtonNotifications" @onclick="pressedNotifications">
+            <img src="/images/HeaderNotificationsIcon.png" />
+        </button>
+        <AuthorizeView Roles="Customer">
+        <button class="rightButton rightButtonShoppingCart" @onclick="pressedShoppingCart">
+            <img src="/images/HeaderShoppingCartIcon.png" />
+        </button>
+        </AuthorizeView>
+        
+        <div class="popup">
+            @if (collapseShoppingCart == true)
+            {}
+            else
+            {
+                <div class="ShoppingCart">
+                    <div class="phoneShoppingcartMenuTop">
+                        <p class="ShoppingCartTitle">Winkelwagen</p>
+                        <button class="closePhoneShoppingcart" @onclick="pressedCloseCollapseShoppingcart">
+                            <img src="/images/HeaderClose.png" />
+                        </button>
+                    </div>
+                    <div class="shopItemsContainer">
+                        <ul class="max list-group p-1">
+                            @foreach (var orderItem in Cart.Items)
+                            {
+                                <li class="list-group-item">
+                                    <small>€ @((orderItem.Product.UnitPrice * orderItem.Quantity).ToString())</small>
+                                    @orderItem.Product.ProductName
+                                    <div style="float:right">
+                                        <button @onclick="() => MinusOne(orderItem)" type="button" class="btn btn-light">-</button>
+                                        @orderItem.Quantity
+                                        <button @onclick="() => PlusOne(orderItem)" type="button" class="btn btn-light">+</button>
+                                        <button @onclick="() => RemoveItem(orderItem)" type="button" class="btn btn-danger" style="float:right">x</button>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                        @if (Cart.Items.Count <= 0)
+                        {
+                            <p class="geenItems">Geen items in de winkelwagen</p>
+                        }else{
+                            <div class="shoppingcartButtonContainer">
+                                <button @onclick="() => ClearItems()" class="shoppingcartButton">Verwijder</button>
+                                <button @onclick="() => OrderItems()" class="shoppingcartButton">Bestel</button>
+                            </div>
+                        }
+                    </div>                
+                </div>
+            }
+            @if (collapseNotifications == true)
+            {}
+            else
+            {
+                <div class="NotificationsMenu">
+                    <div class="phoneNotificationsMenuTop">
+                        <p class="NotificationsMenuTitle">Nieuwe meldingen</p>
+                        <button class="closePhoneNotifications" @onclick="pressedCloseCollapseNotifications">
+                            <img src="/images/HeaderClose.png" />
+                        </button>
+                    </div>
+                    <div class="notificationContainer">
+                        @if (notifications == null)
+                        {
+                            <p class="geenItems">loading...</p>
+                        }
+                        else
+                        {
+                            @foreach (var noti in notifications)
+                            {
+                                if (noti.IsSeen == 0)
+                                {
+                                    if (noti.Message != null)
+                                    {
+                                        <div class="notificatie" @onclick="@(async () => {await EditNotification(noti);})">
+                                            <a href="orders/@noti.Order.OrderId">
+                                                <div class="imgDiv">
+                                                    @if (noti.Message!.Equals("Uw bestelling is geleverd!"))
+                                                    {
+                                                        <i class="fas fa-solid fa-house"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="fas fa-thin fa-circle-check"></i>
+                                                    }
+                                                </div>
+                                                <div class="infoDiv">
+                                                    <p class="bericht">Order @noti.Order.OrderId: @noti.Message.ToString()</p>
+                                                    <p class="berichtInfo">@noti.NotificationDate.ToShortDateString() | @noti.NotificationDate.ToShortTimeString()</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    }
+                                }
+                            }
+                        } 
+                    </div>
+                </div>
+            }
+        </div>
+        <button class="navmenuToggler" @onclick="()=>collapseNavMenu = !collapseNavMenu">
+            <img src="/images/HeaderDropDownMenu.png" />
+        </button>
+    </div>
+</div>
+
+@if (collapseNavMenu == true)
+{}
+else
+{
+    <div class="dropDown">
+        <a href="products" class="phoneButton">
+            Producten
+        </a>
+        <a href="orders" class="phoneButton">
+            Bestellingen
+        </a>
+        <div class="phoneButtonIconsDiv">
+            <button class="phoneButtonIcon phoneButtonNotifications" @onclick="pressedNotifications">
+                <img src="/images/HeaderNotificationsIcon.png" />
+            </button>
+            <button class="phoneButtonIcon phoneButtonShoppingCart" @onclick="pressedShoppingCart">
+                <img src="/images/HeaderShoppingCartIcon.png" />
+            </button>
+        </div>
+    </div>
+}
+
+@code {
+    private bool collapseNavMenu = true;
+    private bool collapseShoppingCart = true;
+    private bool collapseNotifications = true;
+
+    private void isSeen(Notification noti){
+        noti.isSeen(true);
+    }
+
+    private void pressedCloseDropdown(){
+        collapseNavMenu = true;
+    }
+
+    private void pressedShoppingCart()
+    {
+        collapseShoppingCart = !collapseShoppingCart;
+        collapseNotifications = true;
+        collapseNavMenu = true;
+    }
+
+    private void pressedNotifications()
+    {
+        collapseNotifications = !collapseNotifications;
+        collapseShoppingCart = true;
+        collapseNavMenu = true;
+    }
+
+    private void pressedCloseCollapseNotifications()
+    {
+        collapseNotifications = true;
+        collapseNavMenu = true;
+    }
+
+    private void pressedCloseCollapseShoppingcart()
+    {
+        collapseShoppingCart = true;
+        collapseNavMenu = true;
+    }
+}
